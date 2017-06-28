@@ -235,14 +235,14 @@ class EventListener implements Listener{
     $b = $e->getBlock();
     $main = EggWars::getInstance();
     if($main->IsInArena($o->getName())){
-      if($b->getId() === 122){
+      if($b->getId() === 26){
         $yun = $b->getLevel()->getBlock(new Vector3($b->x, $b->y - 1, $b->z));
         if($yun->getId() === 35){
           $color = $yun->getDamage();
           $Team = array_search($color, $main->TeamSearcher());
           $oht = $main->PlayerTeamColor($o);
           if($oht === $Team){
-            $o->sendPopup("§8»§c You can not break your own egg!");
+            $o->sendPopup("§8»§c You can not break your own Bed!");
             $e->setCancelled();
           }else{
             $b->getLevel()->setBlock(new Vector3($b->x, $b->y, $b->z), Block::get(0));
