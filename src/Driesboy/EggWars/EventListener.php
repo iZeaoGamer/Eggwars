@@ -230,7 +230,7 @@ class EventListener implements Listener{
     }
   }
 
-  public function DestroyEgg(PlayerInteractEvent $e){
+  public function DestroyBed(PlayerInteractEvent $e){
     $o = $e->getPlayer();
     $b = $e->getBlock();
     $main = EggWars::getInstance();
@@ -249,7 +249,7 @@ class EventListener implements Listener{
             $main->CreateLightning($b->x, $b->y, $b->z, $o->getLevel());
             $arena = $main->IsInArena($o->getName());
             $main->ky[$arena][] = $Team;
-            $main->ArenaMessage($main->IsInArena($o->getName()), "§eTeam " .$main->Teams()[$Team]."$Team's".$main->Teams()[$oht]." §eegg has been destroyed by " .$o->getNameTag());
+            $main->ArenaMessage($main->IsInArena($o->getName()), "§eTeam " .$main->Teams()[$Team]."$Team's".$main->Teams()[$oht]." §eBed has been destroyed by " .$o->getNameTag());
           }
         }
       }
