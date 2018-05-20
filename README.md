@@ -32,3 +32,7 @@ Hi, the installation of the plugin I'm telling you now.
 
 ## EGG WARS TEAM EGG SETUP
 ### Place the Team Color Wool and put the Dragon Egg on top.
+
+
+## Keep in mind:
+# This plugin is currently in the ALPHA stages. There may be bugs or worse, it might fail. If you want to report a bug, please report it at the issues tab, and we can see if we can try and fix it. Thanks.
