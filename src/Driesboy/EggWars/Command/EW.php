@@ -24,7 +24,7 @@ class EW extends Command{
     parent::__construct("ew", "EggWars by Driesboy & Enes5519");
   }
 
-  public function execute(CommandSender $g, $label, array $args){
+  public function execute(CommandSender $g, string $label, array $args): bool{
     $main = EggWars::getInstance();
     if($g->hasPermission("eggwars.command") && $g instanceof Player){
       if(!empty($args[0])){
@@ -119,7 +119,7 @@ class EW extends Command{
   }
 
 
-  public function CreateShop($x, $y, $z, $yaw, $pitch, Level $World, $pro){
+  public function CreateShop(int $x, int $y, int $z, int $yaw, int $pitch, Level $World, $pro){
     $nbt = new CompoundTag("", [
       "Pos" => new ListTag("Pos", [
         new DoubleTag("", $x),
