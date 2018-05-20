@@ -446,7 +446,7 @@ class EventListener implements Listener{
     }
   }
 
-  public function envKapat(InventoryCloseEvent $e){
+  public function onClose(InventoryCloseEvent $e){
     $o = $e->getPlayer();
     $env = $e->getInventory();
     $main = EggWars::getInstance();
