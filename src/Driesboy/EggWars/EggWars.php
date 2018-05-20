@@ -33,7 +33,7 @@ class EggWars extends PluginBase{
   public $m = array();
   public $mo = array();
 
-  public function onEnable(){
+  public function onEnable(): void{
     @mkdir($this->getDataFolder());
     @mkdir($this->getDataFolder()."Arenas/");
     @mkdir($this->getDataFolder()."Back-Up/");
@@ -44,11 +44,11 @@ class EggWars extends PluginBase{
     $this->PrepareArenas();
   }
 
-  public static function getInstance(){
+  public static function getInstance(): void{
     return self::$ins;
   }
 
-  public function AnotherPrepare(){
+  public function AnotherPrepare(): void{
     Server::getInstance()->getPluginManager()->registerEvents(new EventListener(), $this);
     Server::getInstance()->getScheduler()->scheduleRepeatingTask(new SignManager($this), 20);
     Server::getInstance()->getScheduler()->scheduleRepeatingTask(new Game($this), 20);
@@ -56,7 +56,7 @@ class EggWars extends PluginBase{
     Server::getInstance()->getCommandMap()->register("hub", new Hub());
   }
 
-  public function PrepareArenas(){
+  public function PrepareArenas(): Arena{
     foreach($this->Arenas() as $arena){
       if($this->ArenaReady($arena)){
         $this->ArenaRefresh($arena);
@@ -64,7 +64,7 @@ class EggWars extends PluginBase{
     }
   }
 
-  public function ArenaPlayer($arena){
+  public function ArenaPlayer(Arena $arena){
     $ac = new Config($this->getDataFolder()."Arenas/$arena.yml", Config::YAML);
     $Players = $ac->get("Players");
     $o = array();
@@ -79,7 +79,7 @@ class EggWars extends PluginBase{
     return $o;
   }
 
-  public function RemoveArenaPlayer($arena, $isim, $oa = 0){
+  public function RemoveArenaPlayer(Arena $arena, string $isim, Player $oa = 0){
     $ac = new Config($this->getDataFolder()."Arenas/$arena.yml", Config::YAML);
     $Players = $ac->get("Players");
     $Status = $ac->get("Status");
@@ -102,7 +102,7 @@ class EggWars extends PluginBase{
     }
   }
 
-  public function AddArenaPlayer($arena, $isim){
+  public function AddArenaPlayer(Arena $arena, string $isim){
     $ac = new Config($this->getDataFolder()."Arenas/$arena.yml", Config::YAML);
     $Players = $ac->get("Players");
     if(!in_array($isim, $Players)){
@@ -121,7 +121,7 @@ class EggWars extends PluginBase{
     }
   }
 
-  public function Arenas(){
+  public function Arenas(): Arena{
     $Arenas = array();
     $d = opendir($this->getDataFolder()."Arenas");
     while($file = readdir($d)){
@@ -135,7 +135,7 @@ class EggWars extends PluginBase{
     return $Arenas;
   }
 
-  public function Teams(){
+  public function Teams(): Arena{
     $Teams = array(
       "ORANGE" => "§6",
       "PURPLE" => "§d",
@@ -149,7 +149,7 @@ class EggWars extends PluginBase{
     return $Teams;
   }
 
-  public function TeamSearcher(){
+  public function TeamSearcher(): Arena{
     $tyc = array(
       "ORANGE" => 1,
       "PURPLE" => 10,
@@ -164,7 +164,7 @@ class EggWars extends PluginBase{
   }
 
 
-  public function ArenaControl($arena){
+  public function ArenaControl(Arena $arena){
     if(file_exists($this->getDataFolder()."Arenas/$arena.yml")){
       return true;
     }else{
@@ -172,7 +172,7 @@ class EggWars extends PluginBase{
     }
   }
 
-  public function ArenaReady($arena){
+  public function ArenaReady(Arena $arena){
     $ac = new Config($this->getDataFolder()."Arenas/$arena.yml", Config::YAML);
     if($ac->get("World")){
       if(file_exists($this->getDataFolder()."Back-Up/".$ac->get("World")."/")){
@@ -185,7 +185,7 @@ class EggWars extends PluginBase{
     }
   }
 
-  public function IsInArena($isim){
+  public function IsInArena(string $isim){
     $Arenas = $this->Arenas();
     $a = null;
     foreach ($Arenas as $arena){
@@ -203,13 +203,13 @@ class EggWars extends PluginBase{
     }
   }
 
-  public function ArenaStatus($arena){
+  public function ArenaStatus(Arena $arena){
     $ac = new Config($this->getDataFolder()."Arenas/$arena.yml", Config::YAML);
     $Status = $ac->get("Status");
     return $Status;
   }
 
-  public function ArenaCreate($arena, $Team, $tbo, Player $o){
+  public function ArenaCreate(Arena $arena, Team $Team, string $tbo, Player $o){
     if(!$this->ArenaControl($arena)){
       if($Team <= 8) {
         if($tbo <= 8) {
@@ -234,7 +234,7 @@ class EggWars extends PluginBase{
     }
   }
 
-  public function ArenaTeams($arena){
+  public function ArenaTeams(Arena $arena){
     if($this->ArenaControl($arena)){
       $ac = new Config($this->getDataFolder() . "Arenas/$arena.yml", Config::YAML);
       $Teams = array();
@@ -249,7 +249,7 @@ class EggWars extends PluginBase{
     }
   }
 
-  public function ArenaSet($arena, $Team, Player $o){
+  public function ArenaSet(Arena $arena, Team $Team, Player $o){
     if($this->ArenaControl($arena)){
       $ac = new Config($this->getDataFolder() . "Arenas/$arena.yml", Config::YAML);
       if(!empty($this->Teams()[$Team])){
@@ -297,7 +297,7 @@ class EggWars extends PluginBase{
     closedir($directory);
   }
 
-  public function MapReset($arena){
+  public function MapReset(Arena $arena){
     $ac = new Config($this->getDataFolder()."Arenas/$arena.yml");
     $World = $ac->get("World");
     $level = Server::getInstance()->getLevelByName($World);
@@ -308,7 +308,7 @@ class EggWars extends PluginBase{
     Server::getInstance()->loadLevel($World);
   }
 
-  public function ItemId(Player $o, $id){
+  public function ItemId(Player $o, Item $id){
     $items = 0;
     for($i=0; $i<36; $i++){
       $item = $o->getInventory()->getItem($i);
@@ -319,7 +319,7 @@ class EggWars extends PluginBase{
     return $items;
   }
 
-  public function Status($arena){
+  public function Status(Arena $arena){
     $Status = array();
     $plus = "§8[§a+§8]";
     $minus = "§8[§c-§8]";
@@ -333,7 +333,7 @@ class EggWars extends PluginBase{
     return $Status;
   }
 
-  public function ArenaMessage($arena, $message){
+  public function ArenaMessage(Arena $arena, Message $message){
     $Players = $this->ArenaPlayer($arena);
     foreach($Players as $Is){
       $o = $this->getServer()->getPlayer($Is);
@@ -353,7 +353,7 @@ class EggWars extends PluginBase{
     }
   }
 
-  public function AvailableTeams($arena){
+  public function AvailableTeams(Arena $arena){
     $Players = $this->ArenaPlayer($arena);
     $TeamNumber = 0;
     $cfg = new Config($this->getDataFolder()."Arenas/$arena.yml", Config::YAML);
@@ -377,13 +377,13 @@ class EggWars extends PluginBase{
     return $musaitTeam;
   }
 
-  public function AvailableRastTeam($arena){
+  public function AvailableRastTeam(Arena $arena){
     $mt = $this->AvailableTeams($arena);
     $mixed = array_rand($mt);
     return $this->Teams()[$mt[$mixed]];
   }
 
-  public function TeamSellector($arena, Player $o){
+  public function TeamSellector(Arena $arena, Player $o){
     foreach($this->ArenaTeams($arena) as $at){
       $meta = $this->TeamSearcher()[$at];
       $color = $this->Teams()[$at];
@@ -394,7 +394,7 @@ class EggWars extends PluginBase{
     }
   }
 
-  public function EggSkin($arena, $Team){
+  public function EggSkin(Arena $arena, Team $Team){
     if(empty($this->ky[$arena])){
       return false;
     }else{
@@ -406,7 +406,7 @@ class EggWars extends PluginBase{
     }
   }
 
-  public function ArenaRefresh($arena){
+  public function ArenaRefresh(Arena $arena){
     $ac = new Config($this->getDataFolder()."Arenas/$arena.yml", Config::YAML);
     $cfg = new Config($this->getDataFolder()."config.yml", Config::YAML);
     $Lobby = Server::getInstance()->getLevelByName($ac->getNested("Lobby.World"));
@@ -422,7 +422,7 @@ class EggWars extends PluginBase{
     $this->MapReset($arena);
   }
 
-  public function OneTeamRemained($arena){
+  public function OneTeamRemained(Arena $arena){
     $Players = $this->ArenaPlayer($arena);
     $Teams = array();
     foreach ($Players as $ol){
@@ -467,7 +467,7 @@ class EggWars extends PluginBase{
     }
   }
 
-  public static function CreateLightning($x, $y, $z, $level){
+  public static function CreateLightning(int $x, int $y, int $z, Level $level){
     $pk = new AddEntityPacket();
     $pk->metadata = array();
     $pk->type = 93;
