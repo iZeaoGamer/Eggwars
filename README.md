@@ -1,9 +1,8 @@
 # Plugin coding: Enes5519 & Driesboy
-# Only works on PMMP and BlueLight
+# Only works on Pocketmine.
 
-### API3 -> https://github.com/NL-4-DEVS/Eggwars/tree/API3
 
-[![Poggit-CI](https://poggit.pmmp.io/ci.badge/NL-4-DEVS/Eggwars/Eggwars)](https://poggit.pmmp.io/ci/NL-4-DEVS/Eggwars/Eggwars)
+## Plugin updated by VMPE Development Team
 
 Hi, the installation of the plugin I'm telling you now.
  
