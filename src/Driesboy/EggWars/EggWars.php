@@ -121,7 +121,7 @@ class EggWars extends PluginBase{
     }
   }
 
-  public function Arenas(): Arena{
+  public function Arenas(){
     $Arenas = array();
     $d = opendir($this->getDataFolder()."Arenas");
     while($file = readdir($d)){
@@ -135,7 +135,7 @@ class EggWars extends PluginBase{
     return $Arenas;
   }
 
-  public function Teams(): Arena{
+  public function Teams(){
     $Teams = array(
       "ORANGE" => "§6",
       "PURPLE" => "§d",
@@ -149,7 +149,7 @@ class EggWars extends PluginBase{
     return $Teams;
   }
 
-  public function TeamSearcher(): Arena{
+  public function TeamSearcher(){
     $tyc = array(
       "ORANGE" => 1,
       "PURPLE" => 10,
@@ -319,7 +319,7 @@ class EggWars extends PluginBase{
     return $items;
   }
 
-  public function Status(Arena $arena){
+  public function Status($arena){
     $Status = array();
     $plus = "§8[§a+§8]";
     $minus = "§8[§c-§8]";
