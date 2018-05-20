@@ -20,7 +20,7 @@ class Game extends PluginTask{
     parent::__construct($p);
   }
 
-  public function onRun($tick){
+  public function onRun(int $tick){
     $main = $this->p;
     foreach($main->Arenas() as $arena){
       if($main->ArenaReady($arena)){
