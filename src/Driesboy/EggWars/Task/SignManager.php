@@ -16,7 +16,7 @@ class SignManager extends PluginTask{
     parent::__construct($p);
   }
 
-  public function onRun($currentTick){
+  public function onRun(int $currentTick){
     $main = $this->p;
     $level = Server::getInstance()->getDefaultLevel();
     $tiles = $level->getTiles();
