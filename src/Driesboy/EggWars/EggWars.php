@@ -56,13 +56,12 @@ class EggWars extends PluginBase{
     Server::getInstance()->getCommandMap()->register("hub", new Hub());
   }
 
-  public function PrepareArenas(): Arena{
+  public function PrepareArenas(){
     foreach($this->Arenas() as $arena){
       if($this->ArenaReady($arena)){
         $this->ArenaRefresh($arena);
       }
     }
-  }
 
   public function ArenaPlayer(Arena $arena){
     $ac = new Config($this->getDataFolder()."Arenas/$arena.yml", Config::YAML);
