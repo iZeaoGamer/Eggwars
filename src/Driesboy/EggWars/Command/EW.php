@@ -116,8 +116,8 @@ class EW extends Command{
     }else{
       $g->sendMessage("§8» §6EggWars Plugin By §eDriesboy & Enes5519!");
     }
+  return true;
   }
-
 
   public function CreateShop(int $x, int $y, int $z, int $yaw, int $pitch, Level $World, $pro){
     $nbt = new CompoundTag("", [
