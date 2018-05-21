@@ -62,7 +62,7 @@ class EggWars extends PluginBase{
         $this->ArenaRefresh($arena);
       }
     }
-
+  }
   public function ArenaPlayer(Arena $arena){
     $ac = new Config($this->getDataFolder()."Arenas/$arena.yml", Config::YAML);
     $Players = $ac->get("Players");
