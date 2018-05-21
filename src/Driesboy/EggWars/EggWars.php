@@ -44,7 +44,7 @@ class EggWars extends PluginBase{
     $this->PrepareArenas();
   }
 
-  public static function getInstance(): Main{
+  public static function getInstance(): EggWars{
     return self::$ins;
   }
 
