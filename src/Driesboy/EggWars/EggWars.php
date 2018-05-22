@@ -208,7 +208,7 @@ class EggWars extends PluginBase{
     return $Status;
   }
 
-  public function ArenaCreate(Arena $arena, Team $Team, string $tbo, Player $o){
+  public function ArenaCreate(Arena $arena, Team $Team, $tbo, Player $o){
     if(!$this->ArenaControl($arena)){
       if($Team <= 8) {
         if($tbo <= 8) {
