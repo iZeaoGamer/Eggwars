@@ -208,7 +208,7 @@ class EggWars extends PluginBase{
     return $Status;
   }
 
-  public function ArenaCreate(Arena $arena, Team $Team, $tbo, Player $o){
+  public function ArenaCreate($arena, $Team, $tbo, $o){
     if(!$this->ArenaControl($arena)){
       if($Team <= 8) {
         if($tbo <= 8) {
@@ -248,7 +248,7 @@ class EggWars extends PluginBase{
     }
   }
 
-  public function ArenaSet(Arena $arena, Team $Team, Player $o){
+  public function ArenaSet($arena, $Team, $o){
     if($this->ArenaControl($arena)){
       $ac = new Config($this->getDataFolder() . "Arenas/$arena.yml", Config::YAML);
       if(!empty($this->Teams()[$Team])){
@@ -307,7 +307,7 @@ class EggWars extends PluginBase{
     Server::getInstance()->loadLevel($World);
   }
 
-  public function ItemId(Player $o, Item $id){
+  public function ItemId($o, $id){
     $items = 0;
     for($i=0; $i<36; $i++){
       $item = $o->getInventory()->getItem($i);
@@ -332,7 +332,7 @@ class EggWars extends PluginBase{
     return $Status;
   }
 
-  public function ArenaMessage(Arena $arena, Message $message){
+  public function ArenaMessage($arena, $message){
     $Players = $this->ArenaPlayer($arena);
     foreach($Players as $Is){
       $o = $this->getServer()->getPlayer($Is);
@@ -342,7 +342,7 @@ class EggWars extends PluginBase{
     }
   }
 
-  public function PlayerTeamColor(Player $o){
+  public function PlayerTeamColor($o){
     $TeamColor = substr($o->getNameTag(), 0, 3);
     if(strstr($TeamColor, "§")){
       $Key = array_search($TeamColor, $this->Teams());
@@ -376,13 +376,13 @@ class EggWars extends PluginBase{
     return $musaitTeam;
   }
 
-  public function AvailableRastTeam(Arena $arena){
+  public function AvailableRastTeam($arena){
     $mt = $this->AvailableTeams($arena);
     $mixed = array_rand($mt);
     return $this->Teams()[$mt[$mixed]];
   }
 
-  public function TeamSellector(Arena $arena, Player $o){
+  public function TeamSellector($arena, $o){
     foreach($this->ArenaTeams($arena) as $at){
       $meta = $this->TeamSearcher()[$at];
       $color = $this->Teams()[$at];
@@ -393,7 +393,7 @@ class EggWars extends PluginBase{
     }
   }
 
-  public function EggSkin(Arena $arena, Team $Team){
+  public function EggSkin($arena, $Team){
     if(empty($this->ky[$arena])){
       return false;
     }else{
@@ -405,7 +405,7 @@ class EggWars extends PluginBase{
     }
   }
 
-  public function ArenaRefresh(Arena $arena){
+  public function ArenaRefresh($arena){
     $ac = new Config($this->getDataFolder()."Arenas/$arena.yml", Config::YAML);
     $cfg = new Config($this->getDataFolder()."config.yml", Config::YAML);
     $Lobby = Server::getInstance()->getLevelByName($ac->getNested("Lobby.World"));
@@ -421,7 +421,7 @@ class EggWars extends PluginBase{
     $this->MapReset($arena);
   }
 
-  public function OneTeamRemained(Arena $arena){
+  public function OneTeamRemained($arena){
     $Players = $this->ArenaPlayer($arena);
     $Teams = array();
     foreach ($Players as $ol){
@@ -440,7 +440,7 @@ class EggWars extends PluginBase{
     }
   }
 
-  public function EmptyShop(Player $o){
+  public function EmptyShop($o){
     $o->getLevel()->setBlock(new Vector3($o->getFloorX(), $o->getFloorY() - 4, $o->getFloorZ()), Block::get(Block::CHEST));
     $nbt = new CompoundTag("", [
       new ListTag("Items", []),
